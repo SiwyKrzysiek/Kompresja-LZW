@@ -23,14 +23,20 @@ namespace LZW_Compersion
 
                 if (dictionary.ContainsKey(sequenceWithNewSymbol)) //Sprawdzenie czy przedłużony ciąg jest w słowniku
                 {
-                    currentSequence = sequenceWithNewSymbol;
+                    currentSequence = sequenceWithNewSymbol; //Jeśli aktualny ciąg jest już w słowniku to dodajemy aktualny znak do aktualnego ciągu
                 }
                 else //Nie ma kodu dla rozszeżonego ciągu
                 {
                     result.Add(dictionary[currentSequence]); //Wypisanie kodu dla ciągu, który do tej pory był w słowniki
-                    dictionary.Add(sequenceWithNewSymbol, (DataBlock)dictionary.Count);
+
+                    dictionary.Add(sequenceWithNewSymbol, (DataBlock)dictionary.Count); //Dodanie nowego ciągu do słownika
+                    currentSequence = data[i].ToString(); //Zresetowanie ciągu kodowanych znaków
                 }
             }
+
+            result.Add(dictionary[currentSequence]); //Dopisanie pozosatałego ciągu znaków
+
+            return result.ToArray();
         }
 
         private static Dictionary<string, DataBlock> CreateDictionary() //Wypełani słownik pojedyńczymi znakami

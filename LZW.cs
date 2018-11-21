@@ -43,7 +43,7 @@ namespace LZW_Compersion
         {
             Dictionary<string, DataBlock> dictionary = new Dictionary<string, DataBlock>();
 
-            for (char i = char.MinValue; i <= char.MaxValue; i++) //Wpisanie wszystkich możliwych pojednyńczych znaków do słownika
+            for (char i = char.MinValue; i < char.MaxValue; i++) //Wpisanie wszystkich możliwych pojednyńczych znaków do słownika
                 dictionary.Add(i.ToString(), (DataBlock)dictionary.Count); //Generowanie kodów polega na przypisaniu aktualnej wielkości słownika
                                                                            //Ponieważ słownik nigdy nie maleje kody są unikalne
             return dictionary;

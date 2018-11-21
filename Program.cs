@@ -9,6 +9,8 @@ using System.IO;
 
 namespace LZW_Compersion
 {
+    using DataBlock = UInt32;
+
     class MainClass
     {
         public static void Main(string[] args)
@@ -20,6 +22,18 @@ namespace LZW_Compersion
             //data.Close();
 
             string data = File.ReadAllText(@"test.txt");
+
+
+            DataBlock[] compressed = LZW.Compress(data);
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open("comprssed.lzw", FileMode.Create)))
+            {
+                foreach (DataBlock block in compressed)
+                {
+                    writer.Write(block);
+                }
+            }
+
 
 
             //string myFile = File.ReadAllText("test.txt");

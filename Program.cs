@@ -34,7 +34,7 @@ namespace LZW_Compersion
                 }
             }
 
-
+            Console.WriteLine(LZW.Decompress(compressed));
 
             //string myFile = File.ReadAllText("test.txt");
             //Console.WriteLine(myFile);

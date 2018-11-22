@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace LZW_Compersion
 {
@@ -39,6 +40,41 @@ namespace LZW_Compersion
             return result.ToArray();
         }
 
+        public static string Decompress(DataBlock[] compressedData)
+        {
+            if (DataBlock.MaxValue <= char.MaxValue)
+                throw new Exception("To small DataBlock set in code");
+            if (compressedData.Length == 0)
+                return "";
+
+            StringBuilder result = new StringBuilder();
+            Dictionary<DataBlock, string> dictionary = CreateDecmpressionDictionary();
+
+            DataBlock previousCode = compressedData[0];
+            result.Append(dictionary[previousCode]);
+
+            for (int i = 1; i < compressedData.Length; i++)
+            {
+                DataBlock newCode = compressedData[i];
+                string pc = dictionary[previousCode];
+
+                if (dictionary.ContainsKey(newCode))
+                {
+                    dictionary.Add((DataBlock)dictionary.Count, pc + dictionary[newCode][0]);
+                    result.Append(dictionary[newCode]);
+                }
+                else
+                {
+                    dictionary.Add((DataBlock)dictionary.Count, pc + pc[0]);
+                    result.Append(pc + pc[0]);
+                }
+
+                previousCode = newCode;
+            }
+
+            return result.ToString();
+        }
+
         private static Dictionary<string, DataBlock> CreateDictionary() //Wypełani słownik pojedyńczymi znakami
         {
             Dictionary<string, DataBlock> dictionary = new Dictionary<string, DataBlock>();
@@ -46,6 +82,16 @@ namespace LZW_Compersion
             for (char i = char.MinValue; i < char.MaxValue; i++) //Wpisanie wszystkich możliwych pojednyńczych znaków do słownika
                 dictionary.Add(i.ToString(), (DataBlock)dictionary.Count); //Generowanie kodów polega na przypisaniu aktualnej wielkości słownika
                                                                            //Ponieważ słownik nigdy nie maleje kody są unikalne
+            return dictionary;
+        }
+
+        private static Dictionary<DataBlock, string> CreateDecmpressionDictionary()
+        {
+            Dictionary<DataBlock, string> dictionary = new Dictionary<DataBlock, string>();
+
+            for (char i = char.MinValue; i < char.MaxValue; i++)
+                dictionary.Add((DataBlock)dictionary.Count, i.ToString());
+
             return dictionary;
         }
     }

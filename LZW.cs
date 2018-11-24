@@ -8,6 +8,11 @@ namespace LZW_Compersion
 
     public static class LZW
     {
+        /// <summary>
+        /// Kompresuje ciąg znaków algorytmem LZW
+        /// </summary>
+        /// <param name="data">Dane do kompresji</param>
+        /// <returns>Tablica bloków kodu skompresowanych danych</returns>
         public static DataBlock[] Compress(string data)
         {
             if (DataBlock.MaxValue <= char.MaxValue) //Upewnienie się, że typ danych na kody jest dbrze wybrany
@@ -40,6 +45,11 @@ namespace LZW_Compersion
             return result.ToArray();
         }
 
+        /// <summary>
+        /// Dekompresuje dane skompresowane algorytmeme LZW
+        /// </summary>
+        /// <param name="compressedData">Tablica kodów znaków</param>
+        /// <returns>Rozkodowany ciąg</returns>
         public static string Decompress(DataBlock[] compressedData)
         {
             if (DataBlock.MaxValue <= char.MaxValue) //Upewnienie się, że typ danych na kody jest dbrze wybrany
@@ -60,19 +70,20 @@ namespace LZW_Compersion
 
                 if (dictionary.ContainsKey(newCode)) //Jeżeli słownik zawiera aktualnie wczytany kod
                 {
-                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + dictionary[newCode][0]);
-                    result.Append(dictionary[newCode]);
+                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + dictionary[newCode][0]); //Dodanie do słownika kodu popszedniego znaku wraz z pierszym znakiem zdekodowanego ciągu
+                    result.Append(dictionary[newCode]); //Wypisanie znaku kodowanego przez rozpoznany kod
                 }
-                else
+                else //Jeżeli słwonik nie zawiera aktualnie wczytanego kodu
                 {
-                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + previousSymbol[0]);
-                    result.Append(previousSymbol + previousSymbol[0]);
+                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + previousSymbol[0]); //Musiała wystąpić sytuacja, gdzie ciąg został rozszeżony o jeden znak
+                                                                                                     //Dopisujemy więc taki ciąg do słownika
+                    result.Append(previousSymbol + previousSymbol[0]); //Wypisanie odkodowanego ciągu
                 }
 
-                previousCode = newCode;
+                previousCode = newCode; //Poprzedni kod to będzie aktualnie przetważany kod
             }
 
-            return result.ToString();
+            return result.ToString(); //Finalne zbudowanie stringa
         }
 
         /// <summary>

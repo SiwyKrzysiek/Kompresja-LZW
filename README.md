@@ -12,6 +12,7 @@ Realizacja algorytmu na laboratoraia z algorytmówi i struktur danych.
 | -h                                   | Wyświetla pomoc                                                   |
 | -c <plik_wejściowy> <plik_wyjściowy> | Kompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym   |
 | -d <plik_wejściowy> <plik_wyjściowy> | Dekompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym |
+| -demo                                | Uruchamia demonstrację działania programu                         |
 
 ## Dodatkowe informacje
 Algorytm kożysta z kodowania znaków UTF-16 przez co każdy kod ma wielkość 32 bitów.  

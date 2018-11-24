@@ -7,12 +7,12 @@ Realizacja algorytmu na laboratoraia z algorytmówi i struktur danych.
 * Obliczenie współczynnika kompresji
 
 ## Użycie
-| Parametr                             | Opis                                                              |
-|--------------------------------------|-------------------------------------------------------------------|
-| -h                                   | Wyświetla pomoc                                                   |
-| -c <plik_wejściowy> <plik_wyjściowy> | Kompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym   |
-| -d <plik_wejściowy> <plik_wyjściowy> | Dekompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym |
-| -demo                                | Uruchamia demonstrację działania programu                         |
+| Parametr                                     | Opis                                                              |
+|----------------------------------------------|-------------------------------------------------------------------|
+| **-h**                                       | Wyświetla pomoc                                                   |
+| **-c** <_plik_wejściowy_> <_plik_wyjściowy_> | Kompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym   |
+| **-d** <_plik_wejściowy_> <_plik_wyjściowy_> | Dekompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym |
+| **-demo**                                    | Uruchamia demonstrację działania programu                         |
 
 ## Dodatkowe informacje
 Algorytm kożysta z kodowania znaków UTF-16 przez co każdy kod ma wielkość 32 bitów.  

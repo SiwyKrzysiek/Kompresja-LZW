@@ -7,11 +7,11 @@ Realizacja algorytmu na laboratoraia z algorytmówi i struktur danych.
 * Obliczenie współczynnika kompresji
 
 ## Użycie
-| Parameter                     | Description                                                   |
-|-------------------------------|---------------------------------------------------------------|
-| -h                            | Displays help                                                 |
-| -c <input_file> <output_file> | Compresses input file and saves result to output file         |
-| -d <input_file> <output_file> | Decompresses data from input file and saves it to output file |
+| Parametr                             | Opis                                                              |
+|--------------------------------------|-------------------------------------------------------------------|
+| -h                                   | Wyświetla pomoc                                                   |
+| -c <plik_wejściowy> <plik_wyjściowy> | Kompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym   |
+| -d <plik_wejściowy> <plik_wyjściowy> | Dekompresuje plik wejściowy i zapisuje rezultat w pliku wynikowym |
 
 --------------------
 **Autor**: Krzysztof Dąbrowski

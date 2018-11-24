@@ -10,7 +10,7 @@ namespace LZW_Compersion
     {
         public static DataBlock[] Compress(string data)
         {
-            if (DataBlock.MaxValue <= char.MaxValue)
+            if (DataBlock.MaxValue <= char.MaxValue) //Upewnienie się, że typ danych na kody jest dbrze wybrany
                 throw new Exception("To small DataBlock set in code");
             if (data.Length == 0) return new DataBlock[0]; //Edge case dla pustych danych
 
@@ -42,31 +42,31 @@ namespace LZW_Compersion
 
         public static string Decompress(DataBlock[] compressedData)
         {
-            if (DataBlock.MaxValue <= char.MaxValue)
+            if (DataBlock.MaxValue <= char.MaxValue) //Upewnienie się, że typ danych na kody jest dbrze wybrany
                 throw new Exception("To small DataBlock set in code");
-            if (compressedData.Length == 0)
+            if (compressedData.Length == 0) //Obsłużenie pustych danych
                 return "";
 
-            StringBuilder result = new StringBuilder();
-            Dictionary<DataBlock, string> dictionary = CreateDecmpressionDictionary();
+            StringBuilder result = new StringBuilder(); //Zmienna na budowanie wyniku dekompresji
+            Dictionary<DataBlock, string> dictionary = CreateDecmpressionDictionary(); //Utworzenie słownika do dekompresjii
 
-            DataBlock previousCode = compressedData[0];
-            result.Append(dictionary[previousCode]);
+            DataBlock previousCode = compressedData[0]; //Na początek wczytuję pierwszy kod
+            result.Append(dictionary[previousCode]); //Wypisanie znaku zakodowanego pierwszym kodem
 
-            for (int i = 1; i < compressedData.Length; i++)
+            for (int i = 1; i < compressedData.Length; i++) //Dopóki są jeszcze kody
             {
-                DataBlock newCode = compressedData[i];
-                string pc = dictionary[previousCode];
+                DataBlock newCode = compressedData[i]; //Zapisanie aktualnie przetwarzanego kodu
+                string previousSymbol = dictionary[previousCode]; //Zobaczenie jaki ciąg znaków kodował poprzedni kod
 
-                if (dictionary.ContainsKey(newCode))
+                if (dictionary.ContainsKey(newCode)) //Jeżeli słownik zawiera aktualnie wczytany kod
                 {
-                    dictionary.Add((DataBlock)dictionary.Count, pc + dictionary[newCode][0]);
+                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + dictionary[newCode][0]);
                     result.Append(dictionary[newCode]);
                 }
                 else
                 {
-                    dictionary.Add((DataBlock)dictionary.Count, pc + pc[0]);
-                    result.Append(pc + pc[0]);
+                    dictionary.Add((DataBlock)dictionary.Count, previousSymbol + previousSymbol[0]);
+                    result.Append(previousSymbol + previousSymbol[0]);
                 }
 
                 previousCode = newCode;
@@ -75,9 +75,13 @@ namespace LZW_Compersion
             return result.ToString();
         }
 
-        private static Dictionary<string, DataBlock> CreateDictionary() //Wypełani słownik pojedyńczymi znakami
+        /// <summary>
+        /// //Wypełana słownik pojedyńczymi znakami
+        /// </summary>
+        /// <returns>Słownik do kompresji</returns>
+        private static Dictionary<string, DataBlock> CreateDictionary() 
         {
-            Dictionary<string, DataBlock> dictionary = new Dictionary<string, DataBlock>();
+            Dictionary<string, DataBlock> dictionary = new Dictionary<string, DataBlock>(); //Utworzenie pustego słownika
 
             for (char i = char.MinValue; i < char.MaxValue; i++) //Wpisanie wszystkich możliwych pojednyńczych znaków do słownika
                 dictionary.Add(i.ToString(), (DataBlock)dictionary.Count); //Generowanie kodów polega na przypisaniu aktualnej wielkości słownika
@@ -85,12 +89,17 @@ namespace LZW_Compersion
             return dictionary;
         }
 
+        /// <summary>
+        /// Wypełana słownik kodami pojedyńczych znaków
+        /// </summary>
+        /// <returns>Słownik do dekompresjii</returns>
         private static Dictionary<DataBlock, string> CreateDecmpressionDictionary()
         {
-            Dictionary<DataBlock, string> dictionary = new Dictionary<DataBlock, string>();
+            Dictionary<DataBlock, string> dictionary = new Dictionary<DataBlock, string>(); //Utworzenie pustego słownika
 
-            for (char i = char.MinValue; i < char.MaxValue; i++)
-                dictionary.Add((DataBlock)dictionary.Count, i.ToString());
+            for (char i = char.MinValue; i < char.MaxValue; i++) //Wpisanie do słownika kodów wszystkich pojedyńczych znaków
+                dictionary.Add((DataBlock)dictionary.Count, i.ToString()); //Generowanie kodów polega na przypisaniu aktualnej wielkości słownika
+                                                                           //Ponieważ słownik nigdy nie maleje kody są unikalne
 
             return dictionary;
         }

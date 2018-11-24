@@ -1,5 +1,6 @@
 # Algorytm kompresji LZW
-Realizacja algorytmu na laboratoraia z algorytmówi i struktur danych.
+Realizacja algorytmu na laboratoraia z algorytmówi i struktur danych.  
+By zobaczyć działanie programu należy odpalic w terminalu program _LZW_Compersion.exe_
 
 ## Główne funkcje
 * Kompresja

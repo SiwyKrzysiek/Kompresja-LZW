@@ -4,12 +4,8 @@
 //
 //Przejście na C#
 
-using System;
-
 namespace LZW_Compersion
 {
-    using DataBlock = UInt32;
-
     class MainClass
     {
         public static void Main(string[] args)

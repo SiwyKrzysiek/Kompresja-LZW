@@ -54,7 +54,7 @@ namespace LZW_Compersion
                 Console.WriteLine($"Demo wymaka pliku {iliada} w katalogu z programem");
             }
 
-            Console.WriteLine("W ramach demonstracji zostanie przetworzoan Iliada Homera i pierwsza część Harego Potera\n");
+            Console.WriteLine("W ramach demonstracji zostanie przetworzona Iliada Homera i pierwsza część Harego Potera\n");
 
             Console.WriteLine("ILIADA: \n");
             TryToCompress(iliada, compressed1);
@@ -164,7 +164,7 @@ namespace LZW_Compersion
             Console.WriteLine($"Dane z pliku {inputFile} zostały skompresowane i zapisane w pliku {outputFile}");
             Console.WriteLine($"Wielkość pliku wejściowego: {inputFileSize / 1000} KB");
             Console.WriteLine($"Wielkość pliku wyjściowego: {outputFileSize / 1000} KB");
-            Console.WriteLine($"Współczynnik kompresjii wynosi: {compressionDegree:0.00}%\n");
+            Console.WriteLine($"Współczynnik kompresji wynosi: {compressionDegree:0.00}%\n");
         }
     }
 }
